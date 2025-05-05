@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Readers</title>
+</head>
+<body>
+<h2 th:text="${readerBooks.getReader().getName()} + ' c id №' + ${readerBooks.getReader().getId()} + ' имеет книги:'"></h2>
+<ul>
+    <li th:each="book : ${readerBooks.getBooks()}" th:text="${book.getId()} + ' ' + ${book.getName()}"></li>
+</ul>
+</body>
+</html>

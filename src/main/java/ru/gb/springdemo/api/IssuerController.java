@@ -10,7 +10,6 @@ import ru.gb.springdemo.dto.IssueRequest;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.service.IssuerService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 

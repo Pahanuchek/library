@@ -6,6 +6,7 @@ import ru.gb.springdemo.dto.BookAddRequest;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.repository.BookRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -30,5 +31,9 @@ public class BookService {
 
     public void deleteBook(long bookId) {
         bookRepository.deleteById(bookId);
+    }
+
+    public List<Book> getAllBooks() {
+        return (List<Book>) bookRepository.findAll();
     }
 }

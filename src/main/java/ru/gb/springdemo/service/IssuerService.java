@@ -1,6 +1,8 @@
 package ru.gb.springdemo.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.gb.springdemo.dto.IssueRequest;
@@ -12,14 +14,18 @@ import ru.gb.springdemo.repository.IssuerRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class IssuerService {
 
+  @Autowired
   private BookRepository bookRepository;
+  @Autowired
   private ReaderRepository readerRepository;
+  @Autowired
   private IssuerRepository issuerRepository;
 
   @Value("${application.issue.max-allowed-books:1}")
@@ -54,6 +60,10 @@ public class IssuerService {
     issue = issuerRepository.save(issue);
 
     return issue.getReturnedAt();
+  }
+
+  public List<Issue> getAllIssue() {
+    return (List<Issue>) issuerRepository.findAll();
   }
 
 }

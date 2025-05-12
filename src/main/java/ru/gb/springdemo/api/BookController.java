@@ -1,5 +1,7 @@
 package ru.gb.springdemo.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -13,11 +15,13 @@ import ru.gb.springdemo.service.BookService;
 @RestController
 @RequestMapping("/book")
 @AllArgsConstructor
+@Tag(name = "Books")
 public class BookController {
     private BookService bookService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Add new book", description = "Добавляет новую книгу")
     public ResponseEntity<Book> addBook(@RequestBody BookAddRequest bookAddRequest) {
         log.info("Получен запрос на добавление книги с названием: {}", bookAddRequest.getName());
 
@@ -27,6 +31,7 @@ public class BookController {
     }
 
     @GetMapping(path = "/{bookId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get book by id", description = "Получение книги по id")
     public ResponseEntity<Book> getBook(@PathVariable long bookId) {
         log.info("Получен запрос на получение книги с id: {}", bookId);
 
@@ -36,6 +41,7 @@ public class BookController {
     }
 
     @DeleteMapping(path = "/{bookId}")
+    @Operation(summary = "Delete book by id", description = "Удаление книги по id")
     public void deleteBook(@PathVariable long bookId) {
         log.info("Получен запрос на удаление книги с id: {}", bookId);
 

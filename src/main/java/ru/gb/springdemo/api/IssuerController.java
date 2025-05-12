@@ -1,5 +1,7 @@
 package ru.gb.springdemo.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,12 +18,14 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestController
 @RequestMapping("/issue")
+@Tag(name = "Issue")
 public class IssuerController {
 
   @Autowired
   private IssuerService service;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(summary = "Issue book for reader", description = "Выдача книги читателю")
   public ResponseEntity<Issue> issueBook(@RequestBody IssueRequest request) {
     log.info("Получен запрос на выдачу: readerId = {}, bookId = {}", request.getReaderId(), request.getBookId());
 
@@ -36,6 +40,7 @@ public class IssuerController {
   }
 
   @GetMapping(path = "/{issueId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(summary = "Get issue by id", description = "Получение информации о выдаче книги по id")
   public ResponseEntity<Issue> getIssue(@PathVariable long issueId) {
     log.info("Получен запрос получение выдачи с id:  {}", issueId);
 
@@ -45,6 +50,7 @@ public class IssuerController {
   }
 
   @PutMapping(path = "/{issueId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @Operation(summary = "Returned book", description = "Возврат книги")
   public ResponseEntity<LocalDateTime> returnedBook(long issueId) {
     log.info("Получен запрос возврат книги, id выдачи:  {}", issueId);
 

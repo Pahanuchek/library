@@ -3,12 +3,8 @@ package ru.gb.springdemo.config;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import ru.gb.springdemo.model.Book;
-import ru.gb.springdemo.model.Issue;
-import ru.gb.springdemo.model.Reader;
-import ru.gb.springdemo.repository.BookRepository;
-import ru.gb.springdemo.repository.IssuerRepository;
-import ru.gb.springdemo.repository.ReaderRepository;
+import ru.gb.springdemo.model.*;
+import ru.gb.springdemo.repository.*;
 
 @Configuration
 @AllArgsConstructor
@@ -17,6 +13,8 @@ public class ConfigItems {
     private BookRepository bookRepository;
     private ReaderRepository readerRepository;
     private IssuerRepository issuerRepository;
+    private RoleRepository roleRepository;
+    private UserRepository userRepository;
 
 
     @PostConstruct
@@ -40,5 +38,17 @@ public class ConfigItems {
         issuerRepository.save(new Issue(book1, reader1));
         issuerRepository.save(new Issue(book2, reader1));
         issuerRepository.save(new Issue(book3, reader2));
+
+        Role userRole = new Role("user");
+        Role adminRole = new Role("admin");
+
+        User user = new User("user", "user");
+        user.addRole(userRole);
+        User admin = new User("admin", "admin");
+        admin.addRole(adminRole);
+
+        userRepository.save(user);
+        userRepository.save(admin);
+
     }
 }

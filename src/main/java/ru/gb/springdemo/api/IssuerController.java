@@ -36,10 +36,10 @@ public class IssuerController {
       return ResponseEntity.notFound().build();
     }
 
-    return ResponseEntity.status(HttpStatus.CONFLICT).body(issue);
+    return ResponseEntity.ok(issue);
   }
 
-  @GetMapping(path = "/{issueId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/{issueId}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Get issue by id", description = "Получение информации о выдаче книги по id")
   public ResponseEntity<Issue> getIssue(@PathVariable long issueId) {
     log.info("Получен запрос получение выдачи с id:  {}", issueId);
@@ -49,7 +49,7 @@ public class IssuerController {
     return ResponseEntity.ok(issue);
   }
 
-  @PutMapping(path = "/{issueId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(path = "/{issueId}", produces = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Returned book", description = "Возврат книги")
   public ResponseEntity<LocalDateTime> returnedBook(long issueId) {
     log.info("Получен запрос возврат книги, id выдачи:  {}", issueId);

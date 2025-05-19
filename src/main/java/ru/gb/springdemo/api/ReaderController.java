@@ -24,7 +24,7 @@ public class ReaderController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Add new reader", description = "Добавление нового читателя")
-    public ResponseEntity<Reader> addReader(ReaderAddRequest readerAddRequest) {
+    public ResponseEntity<Reader> addReader(@RequestBody ReaderAddRequest readerAddRequest) {
         log.info("Получен запрос на добавление читателя с именем: {}", readerAddRequest.getName());
 
         Reader reader = readerService.addReader(readerAddRequest);

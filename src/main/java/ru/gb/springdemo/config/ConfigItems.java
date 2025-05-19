@@ -13,8 +13,6 @@ public class ConfigItems {
     private BookRepository bookRepository;
     private ReaderRepository readerRepository;
     private IssuerRepository issuerRepository;
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
 
 
     @PostConstruct
@@ -38,17 +36,6 @@ public class ConfigItems {
         issuerRepository.save(new Issue(book1, reader1));
         issuerRepository.save(new Issue(book2, reader1));
         issuerRepository.save(new Issue(book3, reader2));
-
-        Role userRole = new Role("user");
-        Role adminRole = new Role("admin");
-
-        User user = new User("user", "user");
-        user.addRole(userRole);
-        User admin = new User("admin", "admin");
-        admin.addRole(adminRole);
-
-        userRepository.save(user);
-        userRepository.save(admin);
 
     }
 }
